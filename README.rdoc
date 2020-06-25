@@ -1,0 +1,37 @@
+== Código Rails para Popular Profissões de acordo com a CBO
+
+É um código simples mas chato de se fazer. O que eu fiz foi só organizar um código (pra ser usado em um seed do Rails) pra popular a tabela de profissões.
+
+Quem achar algum erro de português ou banco faltando, por favor me sinalize para que outras pessoas possam ter acesso ao arquivo corrigido.
+
+== Uso
+
+Simplesmente copie o conteúdo do arquivo "populate.rb" e cole no seed.rb (ou em outro arquivo) de sua aplicação. Uma outra sugestão é incluir em um arquivo thor na pasta /lib/tasks do seu projeto Rails.
+
+Eu estou usando a tabela de Profissões com a seguinte estrutura:
+  _____________________                                        
+ |    Profissions      |                  
+ |-------------------- |  
+ | description:string  |
+ | code: string        |
+ | type:string         |                              
+  ---------------------               
+
+O loop de inserção das profissões está bem curtinho, então caso sua estrutura seja diferente da minha, é fácil alterar.
+
+
+    professions.each do |profession|
+      Professions.create(
+        description: profession['description'], 
+        code: profession['code'],
+        type: profession['type']
+      ) 
+      puts "Adding profession #{profession['description']}"
+    end
+
+
+== Referências
+
+Eu achei a lista das profissões nesse site: "http://www.mtecbo.gov.br/cbosite/pages/downloads.jsf" 
+
+No projeto contém os models e as migrations de exemplo para criação das tabelas e uso do código. Lembre de alterar o timestamp das migrations.
